@@ -16,13 +16,14 @@ import android.widget.Toast;
  * Created by Administrator on 2017/4/7.
  */
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("FirstActivity", "Task id is " + getTaskId());
         setContentView(R.layout.activity_first);
 
-        Button btn1 = (Button)findViewById(R.id.button_1);
+        Button btn1 = (Button) findViewById(R.id.button_1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,8 +36,10 @@ public class FirstActivity extends AppCompatActivity {
 //                intent.putExtra("extra_data", data);
 //                startActivity(intent);
 
-                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-                startActivityForResult(intent, 1);
+//                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+//                startActivityForResult(intent, 1);
+
+                SecondActivity.actionStart(FirstActivity.this, "data1", "data2");
             }
         });
     }
@@ -53,6 +56,12 @@ public class FirstActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("FirstActivity", "onRestart");
     }
 
     @Override
